@@ -73,46 +73,38 @@ const App = () => {
     localStorage.removeItem("family-office-user");
   };
 
-  if (!user.isAuthenticated) {
-    return (
-      <QueryClientProvider client={queryClient}>
-        <TooltipProvider>
-          <Toaster />
-          <Sonner />
-          <LoginForm onLogin={handleLogin} />
-        </TooltipProvider>
-      </QueryClientProvider>
-    );
-  }
-
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <AppLayout userRole={user.role} userEmail={user.email} onLogout={handleLogout}>
-            <Routes>
-              <Route path="/" element={<Navigate to="/dashboard" replace />} />
-              <Route path="/dashboard" element={<Dashboard userRole={user.role} />} />
-              <Route path="/approvals" element={<Approvals userRole={user.role} />} />
-              <Route path="/expenses" element={<Expenses userRole={user.role} />} />
-              <Route path="/cards" element={<DebitCards userRole={user.role} />} />
-              
-              {/* Placeholder routes for other features */}
-              <Route path="/travel" element={<PlaceholderPage title="Travel Management" />} />
-              <Route path="/fleet" element={<PlaceholderPage title="Fleet Management" />} />
-              <Route path="/checklists" element={<PlaceholderPage title="Operational Checklists" />} />
-              <Route path="/budgets" element={<PlaceholderPage title="Budget Management" />} />
-              <Route path="/staff" element={<PlaceholderPage title="Staff Management" />} />
-              <Route path="/houses" element={<PlaceholderPage title="House Management" />} />
-              <Route path="/alerts" element={<PlaceholderPage title="Alert System" />} />
-              <Route path="/settings" element={<PlaceholderPage title="System Settings" />} />
-              
-              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-              <Route path="*" element={<NotFound />} />
-            </Routes>
-          </AppLayout>
+          {!user.isAuthenticated ? (
+            <LoginForm onLogin={handleLogin} />
+          ) : (
+            <AppLayout userRole={user.role} userEmail={user.email} onLogout={handleLogout}>
+              <Routes>
+                <Route path="/" element={<Navigate to="/dashboard" replace />} />
+                <Route path="/dashboard" element={<Dashboard userRole={user.role} />} />
+                <Route path="/approvals" element={<Approvals userRole={user.role} />} />
+                <Route path="/expenses" element={<Expenses userRole={user.role} />} />
+                <Route path="/cards" element={<DebitCards userRole={user.role} />} />
+                
+                {/* Placeholder routes for other features */}
+                <Route path="/travel" element={<PlaceholderPage title="Travel Management" />} />
+                <Route path="/fleet" element={<PlaceholderPage title="Fleet Management" />} />
+                <Route path="/checklists" element={<PlaceholderPage title="Operational Checklists" />} />
+                <Route path="/budgets" element={<PlaceholderPage title="Budget Management" />} />
+                <Route path="/staff" element={<PlaceholderPage title="Staff Management" />} />
+                <Route path="/houses" element={<PlaceholderPage title="House Management" />} />
+                <Route path="/alerts" element={<PlaceholderPage title="Alert System" />} />
+                <Route path="/settings" element={<PlaceholderPage title="System Settings" />} />
+                
+                {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                <Route path="*" element={<NotFound />} />
+              </Routes>
+            </AppLayout>
+          )}
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>
