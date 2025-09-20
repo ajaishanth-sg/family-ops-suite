@@ -8,13 +8,15 @@ import { Eye, EyeOff, Building2 } from "lucide-react";
 import heroImage from "@/assets/family-office-hero.jpg";
 
 const USER_ROLES = [
-  { value: "hoo", label: "Head of Operations" },
-  { value: "ea", label: "Executive Assistant" },
-  { value: "fa", label: "Financial Adviser" },
-  { value: "accountant", label: "Sr. Accountant" },
-  { value: "muscat-house", label: "Muscat House Manager" },
-  { value: "fleet", label: "Fleet Manager" },
-  { value: "abroad-house", label: "Abroad House Manager" },
+  { value: "chairman", label: "Chairman" },
+  { value: "financial-advisor", label: "Financial Advisor" },
+  { value: "senior-accountant", label: "Senior Accountant" },
+  { value: "head-of-operations", label: "Head of Operations" },
+  { value: "executive-assistant", label: "Executive Assistant" },
+  { value: "house-manager-muscat", label: "House Manager (Muscat)" },
+  { value: "fleet-manager", label: "Fleet Manager" },
+  { value: "spv-company", label: "SPV Company Manager" },
+  { value: "racing-team", label: "Racing Team Manager" },
 ];
 
 interface LoginFormProps {
@@ -36,7 +38,7 @@ export function LoginForm({ onLogin }: LoginFormProps) {
     e.preventDefault();
     if (isLogin) {
       // For demo purposes, allow login with any credentials
-      const role = formData.role || "hoo";
+      const role = formData.role || "chairman";
       onLogin(role, formData.email || "demo@familyoffice.com");
     } else {
       // Handle signup

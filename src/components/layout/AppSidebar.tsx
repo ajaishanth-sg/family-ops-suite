@@ -37,66 +37,105 @@ interface AppSidebarProps {
 }
 
 const ROLE_NAVIGATION = {
-  hoo: [
-    { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+  chairman: [
+    { title: "Executive Dashboard", url: "/dashboard", icon: LayoutDashboard },
+    { title: "Financial Overview", url: "/financial", icon: DollarSign },
+    { title: "Operations", url: "/operations", icon: Users },
     { title: "Approvals", url: "/approvals", icon: FileCheck },
     { title: "Expenses", url: "/expenses", icon: DollarSign },
     { title: "Debit Cards", url: "/cards", icon: CreditCard },
     { title: "Travel Management", url: "/travel", icon: Plane },
     { title: "Fleet Management", url: "/fleet", icon: Car },
-    { title: "Checklists", url: "/checklists", icon: CheckSquare },
-    { title: "Budgets", url: "/budgets", icon: PieChart },
-    { title: "Staff Management", url: "/staff", icon: Users },
     { title: "House Management", url: "/houses", icon: Home },
+    { title: "Staff Management", url: "/staff", icon: Users },
+    { title: "Racing Team", url: "/racing", icon: CheckSquare },
+    { title: "Budgets", url: "/budgets", icon: PieChart },
     { title: "Alerts", url: "/alerts", icon: AlertTriangle },
   ],
-  ea: [
+  "financial-advisor": [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
-    { title: "Staff Management", url: "/staff", icon: Users },
-    { title: "Travel Management", url: "/travel", icon: Plane },
-    { title: "Checklists", url: "/checklists", icon: CheckSquare },
-    { title: "Expenses", url: "/expenses", icon: DollarSign },
-  ],
-  fa: [
-    { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
-    { title: "Approvals", url: "/approvals", icon: FileCheck },
+    { title: "Senior Accountant", url: "/accountant-oversight", icon: Users },
+    { title: "Financial Reports", url: "/financial", icon: DollarSign },
     { title: "Budgets", url: "/budgets", icon: PieChart },
-    { title: "Expenses", url: "/expenses", icon: DollarSign },
-    { title: "Staff Management", url: "/staff", icon: Users },
+    { title: "Treasury", url: "/treasury", icon: DollarSign },
+    { title: "Banks", url: "/banks", icon: CreditCard },
   ],
-  accountant: [
+  "senior-accountant": [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+    { title: "Payments", url: "/payments", icon: DollarSign },
+    { title: "Financial", url: "/financial", icon: DollarSign },
+    { title: "Treasury", url: "/treasury", icon: DollarSign },
+    { title: "Banks", url: "/banks", icon: CreditCard },
     { title: "Expenses", url: "/expenses", icon: DollarSign },
+  ],
+  "head-of-operations": [
+    { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+    { title: "Executive Assistant", url: "/ea-oversight", icon: Users },
+    { title: "House Manager (Muscat)", url: "/muscat-house", icon: Home },
+    { title: "Fleet Manager", url: "/fleet", icon: Car },
+    { title: "SPV Company", url: "/spv-company", icon: Home },
     { title: "Approvals", url: "/approvals", icon: FileCheck },
-    { title: "Debit Cards", url: "/cards", icon: CreditCard },
+    { title: "Alerts", url: "/alerts", icon: AlertTriangle },
   ],
-  "muscat-house": [
+  "executive-assistant": [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+    { title: "HR Management", url: "/hr", icon: Users },
+    { title: "Office Support", url: "/office-support", icon: Users },
+    { title: "Drivers", url: "/drivers", icon: Car },
+    { title: "House Keeping", url: "/housekeeping", icon: Home },
+    { title: "Travel Management", url: "/travel", icon: Plane },
+    { title: "Chairman's Calendar", url: "/calendar", icon: CheckSquare },
+    { title: "Leave Management", url: "/leave", icon: CheckSquare },
+  ],
+  "house-manager-muscat": [
+    { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+    { title: "Maintenance", url: "/maintenance", icon: Settings },
+    { title: "Purchase", url: "/purchase", icon: DollarSign },
     { title: "House Management", url: "/houses", icon: Home },
+    { title: "House Keeping", url: "/housekeeping", icon: Home },
+    { title: "Drivers", url: "/drivers", icon: Car },
+    { title: "Chef", url: "/chef", icon: Users },
     { title: "Expenses", url: "/expenses", icon: DollarSign },
-    { title: "Staff Management", url: "/staff", icon: Users },
   ],
-  fleet: [
+  "fleet-manager": [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+    { title: "Cars", url: "/cars", icon: Car },
+    { title: "Maintenance", url: "/maintenance", icon: Settings },
+    { title: "Drivers", url: "/drivers", icon: Car },
     { title: "Fleet Management", url: "/fleet", icon: Car },
     { title: "Expenses", url: "/expenses", icon: DollarSign },
   ],
-  "abroad-house": [
+  "spv-company": [
     { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+    { title: "HR Management", url: "/hr", icon: Users },
+    { title: "House Keeping", url: "/housekeeping", icon: Home },
+    { title: "Chef", url: "/chef", icon: Users },
+    { title: "Purchase", url: "/purchase", icon: DollarSign },
+    { title: "Maintenance", url: "/maintenance", icon: Settings },
+    { title: "Drivers", url: "/drivers", icon: Car },
     { title: "House Management", url: "/houses", icon: Home },
-    { title: "Staff Management", url: "/staff", icon: Users },
     { title: "Expenses", url: "/expenses", icon: DollarSign },
+  ],
+  "racing-team": [
+    { title: "Dashboard", url: "/dashboard", icon: LayoutDashboard },
+    { title: "Consultant", url: "/consultant", icon: Users },
+    { title: "Service Provider", url: "/service-provider", icon: Users },
+    { title: "Travel Desk", url: "/travel", icon: Plane },
+    { title: "Payment", url: "/payments", icon: DollarSign },
+    { title: "Racing Events", url: "/racing", icon: CheckSquare },
   ],
 };
 
 const ROLE_LABELS = {
-  hoo: "Head of Operations",
-  ea: "Executive Assistant",
-  fa: "Financial Adviser",
-  accountant: "Sr. Accountant",
-  "muscat-house": "Muscat House Manager",
-  fleet: "Fleet Manager",
-  "abroad-house": "Abroad House Manager",
+  chairman: "Chairman",
+  "financial-advisor": "Financial Advisor", 
+  "senior-accountant": "Senior Accountant",
+  "head-of-operations": "Head of Operations",
+  "executive-assistant": "Executive Assistant",
+  "house-manager-muscat": "House Manager (Muscat)",
+  "fleet-manager": "Fleet Manager",
+  "spv-company": "SPV Company Manager",
+  "racing-team": "Racing Team Manager",
 };
 
 export function AppSidebar({ userRole, userEmail, onLogout }: AppSidebarProps) {
@@ -104,7 +143,7 @@ export function AppSidebar({ userRole, userEmail, onLogout }: AppSidebarProps) {
   const location = useLocation();
   const currentPath = location.pathname;
 
-  const navigation = ROLE_NAVIGATION[userRole as keyof typeof ROLE_NAVIGATION] || ROLE_NAVIGATION.hoo;
+  const navigation = ROLE_NAVIGATION[userRole as keyof typeof ROLE_NAVIGATION] || ROLE_NAVIGATION.chairman;
   const roleLabel = ROLE_LABELS[userRole as keyof typeof ROLE_LABELS] || "User";
 
   const isActive = (path: string) => currentPath === path;
