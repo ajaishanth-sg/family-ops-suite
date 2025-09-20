@@ -1,5 +1,8 @@
 import { useLocation } from "react-router-dom";
 import { useEffect } from "react";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { Home, ArrowLeft } from "lucide-react";
 
 const NotFound = () => {
   const location = useLocation();
@@ -9,14 +12,30 @@ const NotFound = () => {
   }, [location.pathname]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">404</h1>
-        <p className="mb-4 text-xl text-gray-600">Oops! Page not found</p>
-        <a href="/" className="text-blue-500 underline hover:text-blue-700">
-          Return to Home
-        </a>
-      </div>
+    <div className="min-h-screen bg-gradient-dashboard flex items-center justify-center p-4">
+      <Card className="w-full max-w-md shadow-xl">
+        <CardContent className="p-8 text-center">
+          <div className="text-6xl font-bold text-primary mb-4">404</div>
+          <h1 className="text-2xl font-bold mb-2">Page Not Found</h1>
+          <p className="text-muted-foreground mb-6">
+            The page you're looking for doesn't exist or has been moved.
+          </p>
+          <div className="space-y-3">
+            <Button asChild className="w-full bg-gradient-primary">
+              <a href="/dashboard">
+                <Home className="h-4 w-4 mr-2" />
+                Return to Dashboard
+              </a>
+            </Button>
+            <Button variant="outline" asChild className="w-full">
+              <a href="javascript:history.back()">
+                <ArrowLeft className="h-4 w-4 mr-2" />
+                Go Back
+              </a>
+            </Button>
+          </div>
+        </CardContent>
+      </Card>
     </div>
   );
 };

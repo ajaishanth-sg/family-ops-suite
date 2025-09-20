@@ -4,93 +4,108 @@
 
 /* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
 All colors MUST be HSL.
+Professional ERP Design System for Family Office
 */
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* Core Brand Colors */
+    --background: 250 250% 99%;
+    --foreground: 218 25% 12%;
 
+    /* Professional Navy Theme */
+    --primary: 218 80% 20%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 218 60% 35%;
+    --primary-dark: 218 90% 15%;
+
+    /* Status & Action Colors */
+    --success: 142 76% 36%;
+    --success-foreground: 0 0% 100%;
+    --warning: 38 92% 50%;
+    --warning-foreground: 0 0% 100%;
+    --danger: 0 84% 55%;
+    --danger-foreground: 0 0% 100%;
+    --info: 199 89% 48%;
+    --info-foreground: 0 0% 100%;
+
+    /* Neutral System */
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
-
+    --card-foreground: 218 25% 12%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 218 25% 12%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    --secondary: 214 32% 91%;
+    --secondary-foreground: 218 25% 12%;
+    --muted: 214 32% 95%;
+    --muted-foreground: 218 10% 45%;
+    --accent: 214 32% 91%;
+    --accent-foreground: 218 25% 12%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --destructive: var(--danger);
+    --destructive-foreground: var(--danger-foreground);
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --border: 214 25% 88%;
+    --input: 214 25% 88%;
+    --ring: var(--primary);
+    --radius: 0.75rem;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    /* ERP Specific Colors */
+    --dashboard-bg: 214 35% 97%;
+    --sidebar-bg: var(--primary);
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-accent: 218 70% 25%;
+    --header-bg: 0 0% 100%;
+    --stat-positive: var(--success);
+    --stat-negative: var(--danger);
+    --stat-neutral: 218 10% 45%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-light)));
+    --gradient-success: linear-gradient(135deg, hsl(var(--success)), hsl(142 76% 45%));
+    --gradient-dashboard: linear-gradient(180deg, hsl(var(--dashboard-bg)), hsl(214 35% 99%));
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    /* Shadows */
+    --shadow-card: 0 1px 3px 0 hsl(218 25% 12% / 0.1), 0 1px 2px -1px hsl(218 25% 12% / 0.1);
+    --shadow-lg: 0 10px 15px -3px hsl(218 25% 12% / 0.1), 0 4px 6px -4px hsl(218 25% 12% / 0.1);
+    --shadow-xl: 0 20px 25px -5px hsl(218 25% 12% / 0.1), 0 8px 10px -6px hsl(218 25% 12% / 0.1);
 
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Animations */
+    --transition-base: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 218 25% 8%;
+    --foreground: 0 0% 95%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --primary: 218 70% 50%;
+    --primary-foreground: 218 25% 8%;
+    --primary-light: 218 60% 60%;
+    --primary-dark: 218 80% 40%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --card: 218 25% 10%;
+    --card-foreground: 0 0% 95%;
+    --popover: 218 25% 10%;
+    --popover-foreground: 0 0% 95%;
 
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 218 20% 15%;
+    --secondary-foreground: 0 0% 95%;
+    --muted: 218 20% 12%;
+    --muted-foreground: 218 10% 65%;
+    --accent: 218 20% 15%;
+    --accent-foreground: 0 0% 95%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --border: 218 20% 18%;
+    --input: 218 20% 18%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --dashboard-bg: 218 25% 6%;
+    --sidebar-bg: 218 25% 10%;
+    --sidebar-foreground: 0 0% 95%;
+    --sidebar-accent: 218 30% 20%;
+    --header-bg: 218 25% 10%;
 
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --gradient-dashboard: linear-gradient(180deg, hsl(var(--dashboard-bg)), hsl(218 25% 8%));
   }
 }
 
@@ -101,5 +116,89 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+    font-family: 'Inter', system-ui, sans-serif;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-semibold;
+  }
+}
+
+@layer components {
+  /* Dashboard Components */
+  .dashboard-card {
+    @apply bg-card rounded-xl border shadow-sm p-6 transition-all duration-200 hover:shadow-md;
+  }
+
+  .stat-card {
+    @apply dashboard-card flex flex-col space-y-2;
+  }
+
+  .stat-value {
+    @apply text-2xl font-bold;
+  }
+
+  .stat-label {
+    @apply text-sm text-muted-foreground font-medium;
+  }
+
+  .stat-change {
+    @apply text-xs font-medium flex items-center gap-1;
+  }
+
+  .stat-positive {
+    @apply text-[hsl(var(--stat-positive))];
+  }
+
+  .stat-negative {
+    @apply text-[hsl(var(--stat-negative))];
+  }
+
+  .stat-neutral {
+    @apply text-[hsl(var(--stat-neutral))];
+  }
+
+  /* Navigation */
+  .nav-item {
+    @apply flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors;
+  }
+
+  .nav-item-active {
+    @apply bg-[hsl(var(--sidebar-accent))] text-sidebar-foreground;
+  }
+
+  .nav-item-inactive {
+    @apply text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-[hsl(var(--sidebar-accent))]/50;
+  }
+
+  /* Status Badges */
+  .status-approved {
+    @apply bg-[hsl(var(--success))] text-[hsl(var(--success-foreground))] px-2 py-1 rounded-full text-xs font-medium;
+  }
+
+  .status-pending {
+    @apply bg-[hsl(var(--warning))] text-[hsl(var(--warning-foreground))] px-2 py-1 rounded-full text-xs font-medium;
+  }
+
+  .status-rejected {
+    @apply bg-[hsl(var(--danger))] text-[hsl(var(--danger-foreground))] px-2 py-1 rounded-full text-xs font-medium;
+  }
+
+  /* Table Styling */
+  .data-table {
+    @apply w-full border-collapse bg-card rounded-lg overflow-hidden shadow-sm;
+  }
+
+  .data-table th {
+    @apply bg-muted px-4 py-3 text-left text-xs font-semibold text-muted-foreground uppercase tracking-wider;
+  }
+
+  .data-table td {
+    @apply px-4 py-3 text-sm border-t;
+  }
+
+  .data-table tr:hover {
+    @apply bg-muted/50;
   }
 }
