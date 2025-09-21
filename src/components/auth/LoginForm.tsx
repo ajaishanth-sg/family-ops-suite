@@ -5,6 +5,7 @@ import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Eye, EyeOff, Building2 } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
 import heroImage from "@/assets/family-office-hero.jpg";
 
 const USER_ROLES = [
@@ -24,6 +25,7 @@ interface LoginFormProps {
 }
 
 export function LoginForm({ onLogin }: LoginFormProps) {
+  const { signIn, signUp, loading } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -34,15 +36,28 @@ export function LoginForm({ onLogin }: LoginFormProps) {
     lastName: "",
   });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
     if (isLogin) {
-      // For demo purposes, allow login with any credentials
-      const role = formData.role || "chairman";
-      onLogin(role, formData.email || "demo@familyoffice.com");
+      const { data, error } = await signIn(formData.email, formData.password);
+      if (data?.user && !error) {
+        // The auth hook will handle the rest via onAuthStateChange
+        onLogin(formData.role || "chairman", formData.email);
+      }
     } else {
-      // Handle signup
-      onLogin(formData.role, formData.email);
+      const { data, error } = await signUp(formData.email, formData.password, {
+        first_name: formData.firstName,
+        last_name: formData.lastName,
+        role: formData.role
+      });
+      
+      if (data?.user && !error) {
+        // For signup, we might need to wait for email confirmation
+        if (data.session) {
+          onLogin(formData.role, formData.email);
+        }
+      }
     }
   };
 
@@ -148,8 +163,8 @@ export function LoginForm({ onLogin }: LoginFormProps) {
               </Select>
             </div>
 
-            <Button type="submit" className="w-full bg-gradient-primary">
-              {isLogin ? "Sign In" : "Create Account"}
+            <Button type="submit" className="w-full bg-gradient-primary" disabled={loading}>
+              {loading ? "Loading..." : (isLogin ? "Sign In" : "Create Account")}
             </Button>
 
             <div className="text-center">

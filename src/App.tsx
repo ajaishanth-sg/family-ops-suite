@@ -10,6 +10,15 @@ import { Dashboard } from "@/pages/Dashboard";
 import { Approvals } from "@/pages/Approvals";
 import { Expenses } from "@/pages/Expenses";
 import { DebitCards } from "@/pages/DebitCards";
+import { Travel } from "@/pages/Travel";
+import { Fleet } from "@/pages/Fleet";
+import { Houses } from "@/pages/Houses";
+import { Operations } from "@/pages/Operations";
+import { Budgets } from "@/pages/Budgets";
+import { Staff } from "@/pages/Staff";
+import { Alerts } from "@/pages/Alerts";
+import { Settings } from "@/pages/Settings";
+import { useAuth } from "@/hooks/useAuth";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -40,38 +49,45 @@ const PlaceholderPage = ({ title }: { title: string }) => (
 );
 
 const App = () => {
-  const [user, setUser] = useState<User>({
+  const { user, profile, loading, signOut, isAuthenticated } = useAuth();
+  const [appUser, setAppUser] = useState<User>({
     role: "",
     email: "",
     isAuthenticated: false,
   });
 
-  // Check for existing session on app load
   useEffect(() => {
-    const savedUser = localStorage.getItem("family-office-user");
-    if (savedUser) {
-      setUser(JSON.parse(savedUser));
+    if (isAuthenticated && profile) {
+      setAppUser({
+        role: profile.role,
+        email: profile.email,
+        isAuthenticated: true,
+      });
+    } else {
+      setAppUser({
+        role: "",
+        email: "",
+        isAuthenticated: false,
+      });
     }
-  }, []);
+  }, [isAuthenticated, profile]);
 
   const handleLogin = (role: string, email: string) => {
-    const userData = {
-      role,
-      email,
-      isAuthenticated: true,
-    };
-    setUser(userData);
-    localStorage.setItem("family-office-user", JSON.stringify(userData));
+    // The useAuth hook handles the actual authentication
+    // This is just for compatibility with existing code
   };
 
-  const handleLogout = () => {
-    setUser({
-      role: "",
-      email: "",
-      isAuthenticated: false,
-    });
-    localStorage.removeItem("family-office-user");
+  const handleLogout = async () => {
+    await signOut();
   };
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <div>Loading...</div>
+      </div>
+    );
+  }
 
   return (
     <QueryClientProvider client={queryClient}>
@@ -79,26 +95,24 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          {!user.isAuthenticated ? (
+          {!appUser.isAuthenticated ? (
             <LoginForm onLogin={handleLogin} />
           ) : (
-            <AppLayout userRole={user.role} userEmail={user.email} onLogout={handleLogout}>
+            <AppLayout userRole={appUser.role} userEmail={appUser.email} onLogout={handleLogout}>
               <Routes>
                 <Route path="/" element={<Navigate to="/dashboard" replace />} />
-                <Route path="/dashboard" element={<Dashboard userRole={user.role} />} />
-                <Route path="/approvals" element={<Approvals userRole={user.role} />} />
-                <Route path="/expenses" element={<Expenses userRole={user.role} />} />
-                <Route path="/cards" element={<DebitCards userRole={user.role} />} />
-                
-                {/* Placeholder routes for other features */}
-                <Route path="/travel" element={<PlaceholderPage title="Travel Management" />} />
-                <Route path="/fleet" element={<PlaceholderPage title="Fleet Management" />} />
-                <Route path="/checklists" element={<PlaceholderPage title="Operational Checklists" />} />
-                <Route path="/budgets" element={<PlaceholderPage title="Budget Management" />} />
-                <Route path="/staff" element={<PlaceholderPage title="Staff Management" />} />
-                <Route path="/houses" element={<PlaceholderPage title="House Management" />} />
-                <Route path="/alerts" element={<PlaceholderPage title="Alert System" />} />
-                <Route path="/settings" element={<PlaceholderPage title="System Settings" />} />
+                <Route path="/dashboard" element={<Dashboard userRole={appUser.role} />} />
+                <Route path="/approvals" element={<Approvals userRole={appUser.role} />} />
+                <Route path="/expenses" element={<Expenses userRole={appUser.role} />} />
+                <Route path="/cards" element={<DebitCards userRole={appUser.role} />} />
+                <Route path="/travel" element={<Travel userRole={appUser.role} />} />
+                <Route path="/fleet" element={<Fleet userRole={appUser.role} />} />
+                <Route path="/checklists" element={<Operations userRole={appUser.role} />} />
+                <Route path="/budgets" element={<Budgets userRole={appUser.role} />} />
+                <Route path="/staff" element={<Staff userRole={appUser.role} />} />
+                <Route path="/houses" element={<Houses userRole={appUser.role} />} />
+                <Route path="/alerts" element={<Alerts userRole={appUser.role} />} />
+                <Route path="/settings" element={<Settings userRole={appUser.role} />} />
                 
                 {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                 <Route path="*" element={<NotFound />} />

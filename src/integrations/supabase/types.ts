@@ -14,7 +14,438 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      alerts: {
+        Row: {
+          created_at: string | null
+          created_by: string
+          expires_at: string | null
+          id: string
+          is_global: boolean | null
+          is_read: boolean | null
+          message: string
+          priority: string | null
+          title: string
+          type: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          created_by: string
+          expires_at?: string | null
+          id?: string
+          is_global?: boolean | null
+          is_read?: boolean | null
+          message: string
+          priority?: string | null
+          title: string
+          type?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          created_by?: string
+          expires_at?: string | null
+          id?: string
+          is_global?: boolean | null
+          is_read?: boolean | null
+          message?: string
+          priority?: string | null
+          title?: string
+          type?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      budgets: {
+        Row: {
+          allocated_amount: number
+          category: string
+          created_at: string | null
+          created_by: string
+          department: string | null
+          id: string
+          manager_id: string | null
+          name: string
+          period_end: string
+          period_start: string
+          remaining_amount: number | null
+          spent_amount: number | null
+          status: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          allocated_amount: number
+          category: string
+          created_at?: string | null
+          created_by: string
+          department?: string | null
+          id?: string
+          manager_id?: string | null
+          name: string
+          period_end: string
+          period_start: string
+          remaining_amount?: number | null
+          spent_amount?: number | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          allocated_amount?: number
+          category?: string
+          created_at?: string | null
+          created_by?: string
+          department?: string | null
+          id?: string
+          manager_id?: string | null
+          name?: string
+          period_end?: string
+          period_start?: string
+          remaining_amount?: number | null
+          spent_amount?: number | null
+          status?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      checklists: {
+        Row: {
+          assigned_to: string | null
+          category: string
+          completed_at: string | null
+          completed_by: string | null
+          created_at: string | null
+          created_by: string
+          description: string | null
+          due_date: string | null
+          id: string
+          priority: string | null
+          status: string | null
+          title: string
+          updated_at: string | null
+        }
+        Insert: {
+          assigned_to?: string | null
+          category: string
+          completed_at?: string | null
+          completed_by?: string | null
+          created_at?: string | null
+          created_by: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title: string
+          updated_at?: string | null
+        }
+        Update: {
+          assigned_to?: string | null
+          category?: string
+          completed_at?: string | null
+          completed_by?: string | null
+          created_at?: string | null
+          created_by?: string
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          priority?: string | null
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          created_at: string | null
+          department: string | null
+          email: string
+          first_name: string | null
+          id: string
+          is_active: boolean | null
+          last_name: string | null
+          phone: string | null
+          role: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          avatar_url?: string | null
+          created_at?: string | null
+          department?: string | null
+          email: string
+          first_name?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_name?: string | null
+          phone?: string | null
+          role?: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          avatar_url?: string | null
+          created_at?: string | null
+          department?: string | null
+          email?: string
+          first_name?: string | null
+          id?: string
+          is_active?: boolean | null
+          last_name?: string | null
+          phone?: string | null
+          role?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      properties: {
+        Row: {
+          address: string | null
+          amenities: string[] | null
+          bathrooms: number | null
+          bedrooms: number | null
+          created_at: string | null
+          id: string
+          last_inspection: string | null
+          location: string
+          manager_id: string | null
+          monthly_expenses: number | null
+          name: string
+          next_inspection: string | null
+          size_sqft: number | null
+          status: string | null
+          type: string | null
+          updated_at: string | null
+        }
+        Insert: {
+          address?: string | null
+          amenities?: string[] | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          created_at?: string | null
+          id?: string
+          last_inspection?: string | null
+          location: string
+          manager_id?: string | null
+          monthly_expenses?: number | null
+          name: string
+          next_inspection?: string | null
+          size_sqft?: number | null
+          status?: string | null
+          type?: string | null
+          updated_at?: string | null
+        }
+        Update: {
+          address?: string | null
+          amenities?: string[] | null
+          bathrooms?: number | null
+          bedrooms?: number | null
+          created_at?: string | null
+          id?: string
+          last_inspection?: string | null
+          location?: string
+          manager_id?: string | null
+          monthly_expenses?: number | null
+          name?: string
+          next_inspection?: string | null
+          size_sqft?: number | null
+          status?: string | null
+          type?: string | null
+          updated_at?: string | null
+        }
+        Relationships: []
+      }
+      staff_records: {
+        Row: {
+          benefits: string[] | null
+          created_at: string | null
+          department: string
+          emergency_contact_name: string | null
+          emergency_contact_phone: string | null
+          employee_id: string
+          hire_date: string
+          id: string
+          manager_id: string | null
+          position: string
+          salary: number | null
+          status: string | null
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          benefits?: string[] | null
+          created_at?: string | null
+          department: string
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          employee_id: string
+          hire_date: string
+          id?: string
+          manager_id?: string | null
+          position: string
+          salary?: number | null
+          status?: string | null
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          benefits?: string[] | null
+          created_at?: string | null
+          department?: string
+          emergency_contact_name?: string | null
+          emergency_contact_phone?: string | null
+          employee_id?: string
+          hire_date?: string
+          id?: string
+          manager_id?: string | null
+          position?: string
+          salary?: number | null
+          status?: string | null
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      system_settings: {
+        Row: {
+          category: string | null
+          description: string | null
+          id: string
+          is_public: boolean | null
+          key: string
+          updated_at: string | null
+          updated_by: string
+          value: Json
+        }
+        Insert: {
+          category?: string | null
+          description?: string | null
+          id?: string
+          is_public?: boolean | null
+          key: string
+          updated_at?: string | null
+          updated_by: string
+          value: Json
+        }
+        Update: {
+          category?: string | null
+          description?: string | null
+          id?: string
+          is_public?: boolean | null
+          key?: string
+          updated_at?: string | null
+          updated_by?: string
+          value?: Json
+        }
+        Relationships: []
+      }
+      travel_requests: {
+        Row: {
+          approved_at: string | null
+          approved_by: string | null
+          budget_amount: number | null
+          created_at: string | null
+          departure_date: string
+          destination: string
+          id: string
+          purpose: string | null
+          return_date: string
+          status: string | null
+          title: string
+          updated_at: string | null
+          user_id: string
+        }
+        Insert: {
+          approved_at?: string | null
+          approved_by?: string | null
+          budget_amount?: number | null
+          created_at?: string | null
+          departure_date: string
+          destination: string
+          id?: string
+          purpose?: string | null
+          return_date: string
+          status?: string | null
+          title: string
+          updated_at?: string | null
+          user_id: string
+        }
+        Update: {
+          approved_at?: string | null
+          approved_by?: string | null
+          budget_amount?: number | null
+          created_at?: string | null
+          departure_date?: string
+          destination?: string
+          id?: string
+          purpose?: string | null
+          return_date?: string
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string
+        }
+        Relationships: []
+      }
+      vehicles: {
+        Row: {
+          created_at: string | null
+          driver_assigned: string | null
+          fuel_type: string | null
+          id: string
+          insurance_expiry: string | null
+          last_service_date: string | null
+          license_plate: string
+          make: string
+          mileage: number | null
+          model: string
+          next_service_date: string | null
+          registration_expiry: string | null
+          status: string | null
+          updated_at: string | null
+          vin: string | null
+          year: number
+        }
+        Insert: {
+          created_at?: string | null
+          driver_assigned?: string | null
+          fuel_type?: string | null
+          id?: string
+          insurance_expiry?: string | null
+          last_service_date?: string | null
+          license_plate: string
+          make: string
+          mileage?: number | null
+          model: string
+          next_service_date?: string | null
+          registration_expiry?: string | null
+          status?: string | null
+          updated_at?: string | null
+          vin?: string | null
+          year: number
+        }
+        Update: {
+          created_at?: string | null
+          driver_assigned?: string | null
+          fuel_type?: string | null
+          id?: string
+          insurance_expiry?: string | null
+          last_service_date?: string | null
+          license_plate?: string
+          make?: string
+          mileage?: number | null
+          model?: string
+          next_service_date?: string | null
+          registration_expiry?: string | null
+          status?: string | null
+          updated_at?: string | null
+          vin?: string | null
+          year?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
