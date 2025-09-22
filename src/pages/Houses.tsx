@@ -66,17 +66,11 @@ export function Houses({ userRole }: HousesProps) {
     try {
       const { data, error } = await supabase
         .from('properties')
-        .select(`
-          *,
-          profiles (
-            first_name,
-            last_name
-          )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setProperties((data as Property[]) || []);
+      setProperties(data as Property[] || []);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -436,10 +430,10 @@ export function Houses({ userRole }: HousesProps) {
                       )}
                     </div>
 
-                    {property.profiles && (
+                    {property.manager_id && (
                       <div className="flex items-center gap-2 text-sm">
                         <User className="h-4 w-4 text-muted-foreground" />
-                        <span>{property.profiles.first_name} {property.profiles.last_name}</span>
+                        <span>Manager: {property.manager_id}</span>
                       </div>
                     )}
 

@@ -55,18 +55,12 @@ export function Settings({ userRole }: SettingsProps) {
     try {
       const { data, error } = await supabase
         .from('system_settings')
-        .select(`
-          *,
-          updater:profiles!system_settings_updated_by_fkey (
-            first_name,
-            last_name
-          )
-        `)
+        .select('*')
         .order('category', { ascending: true })
         .order('key', { ascending: true });
 
       if (error) throw error;
-      setSettings((data as SystemSetting[]) || []);
+      setSettings(data as SystemSetting[] || []);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -374,7 +368,7 @@ export function Settings({ userRole }: SettingsProps) {
                       </pre>
                     </div>
                     <div className="text-xs text-muted-foreground">
-                      Last updated by {setting.updater?.first_name} {setting.updater?.last_name} on{' '}
+                      Last updated by {setting.updated_by} on{' '}
                       {new Date(setting.updated_at).toLocaleString()}
                     </div>
                   </div>

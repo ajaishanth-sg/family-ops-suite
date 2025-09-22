@@ -67,21 +67,11 @@ export function Alerts({ userRole }: AlertsProps) {
     try {
       const { data, error } = await supabase
         .from('alerts')
-        .select(`
-          *,
-          creator:profiles!alerts_created_by_fkey (
-            first_name,
-            last_name
-          ),
-          recipient:profiles!alerts_user_id_fkey (
-            first_name,
-            last_name
-          )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setAlerts((data as Alert[]) || []);
+      setAlerts(data as Alert[] || []);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -440,7 +430,7 @@ export function Alerts({ userRole }: AlertsProps) {
                       <div>
                         <CardTitle className="text-lg">{alert.title}</CardTitle>
                         <p className="text-sm text-muted-foreground">
-                          {alert.creator?.first_name} {alert.creator?.last_name} • {new Date(alert.created_at).toLocaleString()}
+                          {alert.created_by} • {new Date(alert.created_at).toLocaleString()}
                         </p>
                       </div>
                     </div>
@@ -458,8 +448,8 @@ export function Alerts({ userRole }: AlertsProps) {
                   
                   <div className="flex justify-between items-center text-xs text-muted-foreground">
                     <div className="flex items-center gap-4">
-                      {alert.recipient && (
-                        <span>To: {alert.recipient.first_name} {alert.recipient.last_name}</span>
+                      {alert.user_id && (
+                        <span>To: {alert.user_id}</span>
                       )}
                       {alert.expires_at && (
                         <span>Expires: {new Date(alert.expires_at).toLocaleString()}</span>

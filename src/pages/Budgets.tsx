@@ -62,17 +62,11 @@ export function Budgets({ userRole }: BudgetsProps) {
     try {
       const { data, error } = await supabase
         .from('budgets')
-        .select(`
-          *,
-          manager:profiles!budgets_manager_id_fkey (
-            first_name,
-            last_name
-          )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setBudgets((data as Budget[]) || []);
+      setBudgets(data as Budget[] || []);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -424,9 +418,9 @@ export function Budgets({ userRole }: BudgetsProps) {
                         {new Date(budget.period_start).toLocaleDateString()} - {new Date(budget.period_end).toLocaleDateString()}
                       </span>
                     </div>
-                    {budget.manager && (
+                    {budget.manager_id && (
                       <div>
-                        Manager: {budget.manager.first_name} {budget.manager.last_name}
+                        Manager: {budget.manager_id}
                       </div>
                     )}
                   </div>

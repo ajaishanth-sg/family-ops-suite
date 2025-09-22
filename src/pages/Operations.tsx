@@ -66,21 +66,11 @@ export function Operations({ userRole }: OperationsProps) {
     try {
       const { data, error } = await supabase
         .from('checklists')
-        .select(`
-          *,
-          assignee:profiles!checklists_assigned_to_fkey (
-            first_name,
-            last_name
-          ),
-          creator:profiles!checklists_created_by_fkey (
-            first_name,
-            last_name
-          )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setChecklists((data as Checklist[]) || []);
+      setChecklists(data as Checklist[] || []);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -407,25 +397,15 @@ export function Operations({ userRole }: OperationsProps) {
                   )}
                   
                   <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-                    {checklist.assignee && (
+                    {checklist.assigned_to && (
                       <div className="flex items-center gap-2">
                         <User className="h-4 w-4 text-muted-foreground" />
-                        <span>
-                          {checklist.assignee.first_name} {checklist.assignee.last_name}
-                        </span>
+                        <span>Assigned to: {checklist.assigned_to}</span>
                       </div>
                     )}
-                    {checklist.due_date && (
-                      <div className="flex items-center gap-2">
-                        <Calendar className="h-4 w-4 text-muted-foreground" />
-                        <span className={isOverdue(checklist.due_date) ? "text-red-500" : ""}>
-                          Due: {new Date(checklist.due_date).toLocaleDateString()}
-                        </span>
-                      </div>
-                    )}
-                    {checklist.creator && (
+                    {checklist.created_by && (
                       <div className="text-xs text-muted-foreground">
-                        Created by: {checklist.creator.first_name} {checklist.creator.last_name}
+                        Created by: {checklist.created_by}
                       </div>
                     )}
                   </div>

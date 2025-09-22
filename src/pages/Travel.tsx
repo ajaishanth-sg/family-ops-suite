@@ -59,18 +59,11 @@ export function Travel({ userRole }: TravelProps) {
     try {
       const { data, error } = await supabase
         .from('travel_requests')
-        .select(`
-          *,
-          profiles (
-            first_name,
-            last_name,
-            email
-          )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setRequests((data as TravelRequest[]) || []);
+      setRequests(data as TravelRequest[] || []);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -319,7 +312,7 @@ export function Travel({ userRole }: TravelProps) {
                     <div>
                       <CardTitle className="text-lg">{request.title}</CardTitle>
                       <p className="text-sm text-muted-foreground">
-                        {request.profiles?.first_name} {request.profiles?.last_name}
+                        User: {request.user_id}
                       </p>
                     </div>
                     <div className="flex items-center gap-2">

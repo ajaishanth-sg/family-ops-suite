@@ -74,24 +74,11 @@ export function Staff({ userRole }: StaffProps) {
     try {
       const { data, error } = await supabase
         .from('staff_records')
-        .select(`
-          *,
-          profiles!staff_records_user_id_fkey (
-            first_name,
-            last_name,
-            email,
-            phone,
-            avatar_url
-          ),
-          manager:profiles!staff_records_manager_id_fkey (
-            first_name,
-            last_name
-          )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setStaff((data as StaffRecord[]) || []);
+      setStaff(data as StaffRecord[] || []);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -186,10 +173,7 @@ export function Staff({ userRole }: StaffProps) {
   };
 
   const filteredStaff = staff.filter(member => {
-    const profile = member.profiles;
     const matchesSearch = 
-      profile?.first_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      profile?.last_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
       member.position.toLowerCase().includes(searchTerm.toLowerCase()) ||
       member.department.toLowerCase().includes(searchTerm.toLowerCase()) ||
       member.employee_id.toLowerCase().includes(searchTerm.toLowerCase());
@@ -208,8 +192,8 @@ export function Staff({ userRole }: StaffProps) {
     return <Badge variant={variants[status as keyof typeof variants]}>{status}</Badge>;
   };
 
-  const getInitials = (firstName?: string, lastName?: string) => {
-    return `${firstName?.[0] || ''}${lastName?.[0] || ''}`.toUpperCase();
+  const getInitials = (employeeId: string) => {
+    return employeeId.slice(0, 2).toUpperCase();
   };
 
   const canManageStaff = ["chairman", "head-of-operations", "executive-assistant"].includes(userRole);
@@ -424,14 +408,13 @@ export function Staff({ userRole }: StaffProps) {
                     <CardHeader className="pb-3">
                       <div className="flex items-center gap-3">
                         <Avatar>
-                          <AvatarImage src={profile?.avatar_url} />
                           <AvatarFallback>
-                            {getInitials(profile?.first_name, profile?.last_name)}
+                            {getInitials(member.employee_id)}
                           </AvatarFallback>
                         </Avatar>
                         <div className="flex-1">
                           <CardTitle className="text-lg">
-                            {profile?.first_name} {profile?.last_name}
+                            Staff Member {member.employee_id}
                           </CardTitle>
                           <p className="text-sm text-muted-foreground">
                             {member.position}
@@ -453,18 +436,9 @@ export function Staff({ userRole }: StaffProps) {
                       </div>
 
                       <div className="space-y-2 text-sm">
-                        {profile?.email && (
-                          <div className="flex items-center gap-2">
-                            <Mail className="h-4 w-4 text-muted-foreground" />
-                            <span className="truncate">{profile.email}</span>
-                          </div>
-                        )}
-                        {profile?.phone && (
-                          <div className="flex items-center gap-2">
-                            <Phone className="h-4 w-4 text-muted-foreground" />
-                            <span>{profile.phone}</span>
-                          </div>
-                        )}
+                        <div className="text-sm text-muted-foreground">
+                          User ID: {member.user_id}
+                        </div>
                         <div className="flex items-center gap-2">
                           <Calendar className="h-4 w-4 text-muted-foreground" />
                           <span>Hired: {new Date(member.hire_date).toLocaleDateString()}</span>
@@ -477,10 +451,10 @@ export function Staff({ userRole }: StaffProps) {
                         )}
                       </div>
 
-                      {member.manager && (
+                      {member.manager_id && (
                         <div className="text-sm">
                           <span className="text-muted-foreground">Manager:</span>
-                          <div>{member.manager.first_name} {member.manager.last_name}</div>
+                          <div>{member.manager_id}</div>
                         </div>
                       )}
 

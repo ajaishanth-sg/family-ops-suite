@@ -65,17 +65,11 @@ export function Fleet({ userRole }: FleetProps) {
     try {
       const { data, error } = await supabase
         .from('vehicles')
-        .select(`
-          *,
-          profiles (
-            first_name,
-            last_name
-          )
-        `)
+        .select('*')
         .order('created_at', { ascending: false });
 
       if (error) throw error;
-      setVehicles((data as Vehicle[]) || []);
+      setVehicles(data as Vehicle[] || []);
     } catch (error: any) {
       toast({
         title: "Error",
@@ -405,10 +399,10 @@ export function Fleet({ userRole }: FleetProps) {
                       </div>
                     </div>
 
-                    {vehicle.profiles && (
+                    {vehicle.driver_assigned && (
                       <div className="flex items-center gap-2 text-sm">
                         <User className="h-4 w-4 text-muted-foreground" />
-                        <span>{vehicle.profiles.first_name} {vehicle.profiles.last_name}</span>
+                        <span>Driver: {vehicle.driver_assigned}</span>
                       </div>
                     )}
 
